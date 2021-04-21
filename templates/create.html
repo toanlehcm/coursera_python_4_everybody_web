@@ -40,6 +40,15 @@
             width: 80%;
             height: auto;
         }
+
+        .create-form>p>label {
+            display: inline-block;
+            width: 150px;
+        }
+
+        .create-form>p>input {
+            padding: 5px;
+        }
     </style>
 </head>
 
@@ -64,7 +73,7 @@
             </div>
 
             <div class="main-content">
-                <form action="" method="POST">
+                <form class="create-form" action="{{ url_for('store') }}" method="POST">
                     <h2>CREATE PROFILE</h2>
                     <p>
                         <label>Registration number</label>
@@ -90,6 +99,8 @@
                         <label>Score</label>
                         <input type="text" name="score">
                     </p>
+
+                    <button type="submit">Submit</button>
                 </form>
             </div>
         </div>

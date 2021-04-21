@@ -67,9 +67,9 @@
          </div>
 
          <div class="main-content">
+            {% for row in rows %}
             <form class="form-content" action="{{ url_for('update') }}" method="POST">
                <h2>EDIT PROFILE</h2>
-               {% for row in rows %}
                <p>
                   <label>Registration number</label>
                   <input type="text" name="id" value="{{row['id']}}">

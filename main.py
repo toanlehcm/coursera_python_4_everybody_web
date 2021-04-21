@@ -68,6 +68,7 @@ def edit(id):
 
     return render_template("edit.html", rows=rows)
 
+
 @app.route('/update', methods=['POST', 'GET'])
 def update():
     if request.method == 'POST':
@@ -80,33 +81,28 @@ def update():
             score = request.form['score']
             dict_info = {"name": name, "email": email,
                          "hometown": hometown, "dob": dob, "score": score}
+
             with sql.connect("database.db") as con:
                 con.row_factory = sql.Row
                 cur = con.cursor()
-                cur.execute("SELECT * FROM students")
+                cur.execute("SELECT * FROM students WHERE id =%s" % id,)
 
                 rows = cur.fetchall()
-                id_list = []
-                for row in rows:
-                    id_list.append(row["id"])
-                if id not in id_list:
-                    cur.execute("INSERT INTO students (id,name,email,hometown,dob,score) \
-                       VALUES (?,?,?,?,?,?)", (id, name, email, hometown, dob, score))
-                else:
-                    list_key = []
-                    list_value = []
-                    for values in dict_info.values():
-                        list_value.append(values)
-                    for key in dict_info.keys():
-                        list_key.append(key)
 
-                    for i in list_value:
-                        if i == "":
-                            pass
-                        else:
-                            key = (list_key[list_value.index(i)])
-                            cur.execute(
-                                "UPDATE students SET %s = '%s' WHERE id = %s;" % (key, i, id))
+                list_key = []
+                list_value = []
+                for key in dict_info.keys():
+                    list_key.append(key)
+                for values in dict_info.values():
+                    list_value.append(values)
+
+                for i in list_value:
+                    if i == "":
+                        pass
+                    else:
+                        key = (list_key[list_value.index(i)])
+                        cur.execute(
+                            "UPDATE students SET %s = '%s' WHERE id = %s;" % (key, i, id))
                 con.commit()
         except:
             con.rollback()

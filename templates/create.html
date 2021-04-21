@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        .container-fuild {
+            width: 100%;
+            height: auto;
+        }
+
+        .body {
+            width: 100%;
+            height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .sidebar {
+            width: 20%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            line-height: 30px;
+        }
+
+        .sidebar>ul {
+            list-style-type: none;
+            padding: 0px;
+        }
+
+        .sidebar>a {
+            text-decoration: none;
+        }
+
+        .main-content {
+            width: 80%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fuild">
+        <div class="body">
+            <div class="sidebar">
+                <ul>
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="/create">Add</a>
+                    </li>
+                    <li>
+                        <a href="/edit">Update</a>
+                    </li>
+                    <li>
+                        <a href="/delete_form">Delete</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="main-content">
+                <form action="" method="POST">
+                    <h2>CREATE PROFILE</h2>
+                    <p>
+                        <label>Registration number</label>
+                        <input type="text" name="id">
+                    </p>
+                    <p>
+                        <label>Name</label>
+                        <input type="text" name="name">
+                    </p>
+                    <p>
+                        <label>Email</label>
+                        <input type="text" name="email">
+                    </p>
+                    <p>
+                        <label>Hometown</label>
+                        <input type="text" name="hometown">
+                    </p>
+                    <p>
+                        <label>Date of Birth</label>
+                        <input type="text" name="dob">
+                    </p>
+                    <p>
+                        <label>Score</label>
+                        <input type="text" name="score">
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

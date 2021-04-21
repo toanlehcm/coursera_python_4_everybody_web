@@ -134,16 +134,15 @@ def delete_form():
     rows = cur.fetchall()
     return render_template('delete_form.html', rows=rows)
 
-
 @app.route('/delete', methods=['POST', 'GET'])
 def delete():
     if request.method == 'POST':
         try:
-            id = request.form['id']
+            id = request.form['delete_id']
 
             with sql.connect("database.db") as con:
                 cur = con.cursor()
-                cur.execute("DELETE FROM students WHERE id = %s" % id, )
+                cur.execute("DELETE FROM students WHERE id = %s" % id,)
 
             con.commit()
         except:
@@ -160,7 +159,6 @@ def delete():
 
             rows = cur.fetchall()
             return render_template("list.html", rows=rows)
-
 
 if __name__ == '__main__':
     app.run(debug=True)

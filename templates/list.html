@@ -1,105 +1,110 @@
 <!doctype html>
 <html>
-   <head>
-      <meta charset="utf-8">
-      <title></title>
-      <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='../../../static/css/app.css') }}">
-      <style>
-         .container-fuild {
-            width: 100%;
-            height: auto;
-         }
 
-         .body {
-            width: 100%;
-            height: 90%;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-         }
+<head>
+   <meta charset="utf-8">
+   <title></title>
+   <!-- <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='../../../static/css/app.css') }}"> -->
+   <style>
+      .container-fuild {
+         width: 100%;
+         height: auto;
+      }
 
-         .sidebar {
-            width: 20%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            line-height: 30px;
-         }
+      .body {
+         width: 100%;
+         height: 90%;
+         display: flex;
+         justify-content: center;
+         align-items: flex-start;
+      }
 
-         .sidebar > ul {
-            list-style-type: none;
-            padding: 0px;
-         }
-         .sidebar > a {
-            text-decoration: none;
-         }
+      .sidebar {
+         width: 20%;
+         height: 100%;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         line-height: 30px;
+      }
 
-         .main-content {
-            width: 80%;
-            height: auto;
-         }
+      .sidebar>ul {
+         list-style-type: none;
+         padding: 0px;
+      }
 
-         table > thead {
-            font-weight: bold;
-         }
+      .sidebar>ul>li>a {
+         text-decoration: none;
+      }
 
-         table, th, td {
-            padding: 10px;
-            border: 1px solid black;
-            border-collapse: collapse;
-         }
-      </style>
-   </head>
-   <body>
-      <div class="container-fuild">
-         <div class="body">
-            <div class="sidebar">
-               <ul>
-                  <li>
-                     <a href="/">Home</a>
-                 </li>
-                  <li>
-                     <a href = "/create">Add</a>
-                  </li>
-                  <li>
-                     <a href = "/edit">Update</a>
-                  </li>
-                  <li>
-                     <a href = "/delete_form">Delete</a>
-                  </li>
-               </ul>
-            </div>
-          
-            <div class="main-content">
-               <!-- <form action = "{{ url_for('update_form') }}" method = "POST"> -->
-               <table border = 1>
-                  <thead>
-                     <td>Registration number</td>
-                     <td>Name</td>
-                     <td>Email</td>
-                     <td>Hometown</td>
-                     <td>Date of Birth</td>
-                     <td>Score</td>
-                  </thead>
-                  <tbody>
-                     {% for row in rows %}
-                     <tr>
-                        <td>{{row["id"]}}</td>
-                        <td>{{row["Name"]}}</td>
-                        <td>{{row["Email"]}}</td>
-                        <td>{{row['Hometown']}}</td>
-                        <td>{{row['dob']}}</td>
-                        <td>{{row['Score']}}</td>    
-                        
-                     </tr>
-                     {% endfor %}
-                  </tbody>
-               </table>
-               <!-- </form> -->
-            </div>
+      .main-content {
+         width: 80%;
+         height: auto;
+      }
+
+      table>thead {
+         font-weight: bold;
+         text-align: center;
+      }
+
+      table,
+      th,
+      td {
+         padding: 10px;
+         border: 1px solid black;
+         border-collapse: collapse;
+      }
+
+      table>tbody>tr>td>a {
+         text-decoration: none;
+      }
+   </style>
+</head>
+
+<body>
+   <div class="container-fuild">
+      <div class="body">
+         <div class="sidebar">
+            <ul>
+               <li>
+                  <a href="/">Home</a>
+               </li>
+               <li>
+                  <a href="/create">Add</a>
+               </li>
+            </ul>
+         </div>
+
+         <div class="main-content">
+            <table>
+               <thead>
+                  <td>Registration number</td>
+                  <td>Name</td>
+                  <td>Email</td>
+                  <td>Hometown</td>
+                  <td>Date of Birth</td>
+                  <td>Score</td>
+                  <td colspan="2">Action</td>
+               </thead>
+               <tbody>
+                  {% for row in rows %}
+                  <tr>
+                     <td>{{row["id"]}}</td>
+                     <td>{{row["Name"]}}</td>
+                     <td>{{row["Email"]}}</td>
+                     <td>{{row['Hometown']}}</td>
+                     <td>{{row['dob']}}</td>
+                     <td>{{row['Score']}}</td>
+                     <td><a href="/edit/{{row['id']}}">Edit</a></td>
+                     <td>Delete</td>
+                  </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
          </div>
       </div>
-   </body>
+   </div>
+</body>
+
 </html>

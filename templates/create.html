@@ -32,7 +32,7 @@
             padding: 0px;
         }
 
-        .sidebar>a {
+        .sidebar>ul>li>a {
             text-decoration: none;
         }
 
@@ -41,12 +41,12 @@
             height: auto;
         }
 
-        .create-form>p>label {
+        .form-content>p>label {
             display: inline-block;
             width: 150px;
         }
 
-        .create-form>p>input {
+        .form-content>p>input {
             padding: 5px;
         }
     </style>
@@ -63,17 +63,11 @@
                     <li>
                         <a href="/create">Add</a>
                     </li>
-                    <li>
-                        <a href="/edit">Update</a>
-                    </li>
-                    <li>
-                        <a href="/delete_form">Delete</a>
-                    </li>
                 </ul>
             </div>
 
             <div class="main-content">
-                <form class="create-form" action="{{ url_for('store') }}" method="POST">
+                <form class="form-content" action="{{ url_for('store') }}" method="POST">
                     <h2>CREATE PROFILE</h2>
                     <p>
                         <label>Registration number</label>

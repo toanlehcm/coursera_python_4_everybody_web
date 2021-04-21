@@ -56,20 +56,17 @@ def store():
             return render_template("list.html", rows=rows)
 
 
-@app.route('/edit', methods=['POST', 'GET'])
-def update_form():
+@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+def edit(id):
     con = sql.connect("database.db")
     con.row_factory = sql.Row
 
     cur = con.cursor()
-    cur.execute("SELECT * FROM students")
-    cur.execute(
-        "SELECT \"_rowid_\",* FROM \"main\".\"students\"  ORDER BY \"id\" ASC LIMIT 0, 49999;")
+    cur.execute("SELECT * FROM students WHERE id =%s" % id,)
 
     rows = cur.fetchall()
 
-    return render_template("update_form.html", rows=rows)
-
+    return render_template("edit.html", rows=rows)
 
 @app.route('/update', methods=['POST', 'GET'])
 def update():

@@ -134,6 +134,7 @@ def delete_form():
     rows = cur.fetchall()
     return render_template('delete_form.html', rows=rows)
 
+
 @app.route('/delete', methods=['POST', 'GET'])
 def delete():
     if request.method == 'POST':
@@ -159,6 +160,7 @@ def delete():
 
             rows = cur.fetchall()
             return render_template("list.html", rows=rows)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

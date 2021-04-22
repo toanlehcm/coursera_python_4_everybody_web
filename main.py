@@ -120,46 +120,29 @@ def update():
             return render_template("list.html", rows=rows)
 
 
-@app.route('/delete_form', methods=['POST', 'GET'])
-def delete_form():
-
-    con = sql.connect("database.db")
-    con.row_factory = sql.Row
-
-    cur = con.cursor()
-    cur.execute("SELECT * FROM students")
-    cur.execute(
-        "SELECT \"_rowid_\",* FROM \"main\".\"students\"  ORDER BY \"id\" ASC LIMIT 0, 49999;")
-
-    rows = cur.fetchall()
-    return render_template('delete_form.html', rows=rows)
-
-
-@app.route('/delete', methods=['POST', 'GET'])
-def delete():
-    if request.method == 'POST':
-        try:
-            id = request.form['delete_id']
-
-            with sql.connect("database.db") as con:
-                cur = con.cursor()
-                cur.execute("DELETE FROM students WHERE id = %s" % id,)
-
-            con.commit()
-        except:
-            con.rollback()
-
-        finally:
-            con = sql.connect("database.db")
-            con.row_factory = sql.Row
-
+@app.route('/delete/<int:id>')
+def delete(id):
+    try:
+        with sql.connect("database.db") as con:
             cur = con.cursor()
-            cur.execute("SELECT * FROM students")
-            cur.execute(
-                "SELECT \"_rowid_\",* FROM \"main\".\"students\"  ORDER BY \"id\" ASC LIMIT 0, 49999;")
+            cur.execute("DELETE FROM students WHERE id = %s" % id,)
 
-            rows = cur.fetchall()
-            return render_template("list.html", rows=rows)
+        con.commit()
+        # return render_template("list.html")
+    except:
+        con.rollback()
+
+    finally:
+        con = sql.connect("database.db")
+        con.row_factory = sql.Row
+
+        cur = con.cursor()
+        cur.execute("SELECT * FROM students")
+        cur.execute(
+            "SELECT \"_rowid_\",* FROM \"main\".\"students\"  ORDER BY \"id\" ASC LIMIT 0, 49999;")
+
+        rows = cur.fetchall()
+        return render_template("list.html", rows=rows)
 
 
 if __name__ == '__main__':

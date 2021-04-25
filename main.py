@@ -34,6 +34,7 @@ def store():
             score = request.form['score']
             dict_info = {"name": name, "email": email,
                          "hometown": hometown, "dob": dob, "score": score}
+
             with sql.connect("database.db") as con:
                 con.row_factory = sql.Row
                 cur = con.cursor()
